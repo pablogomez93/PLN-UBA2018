@@ -15,32 +15,35 @@ Options:
 """
 from docopt import docopt
 import pickle
+import nltk
 
-from nltk.corpus import gutenberg
-
+# from nltk.corpus import gutenberg
 from languagemodeling.ngram import NGram
 # from languagemodeling.ngram import NGram, AddOneNGram, InterpolatedNGram
 
 
-# models = {
-#     'ngram': NGram,
+models = {
+    'ngram': NGram,
 #     'addone': AddOneNGram,
 #     'inter': InterpolatedNGram,
-# }
-
+}
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
 
     # load the data
-    # WORK HERE!! LOAD YOUR TRAINING CORPUS
-    sents = gutenberg.sents(['austen-emma.txt', 'austen-sense.txt'])
+    corpusReader = nltk.corpus.reader.plaintext.PlaintextCorpusReader
+    corpus = corpusReader(".", "corpus.txt")
+    sents = corpus.sents()
 
     # train the model
     n = int(opts['-n'])
     model = NGram(n, sents)
-    # model_class = models[opts['-m']]
-    # model = model_class(n, sents)
+    model_class = models[opts['-m']]
+    model = model_class(n, sents)
+
+    # print(model.count(('de', 'cada')))
+    # print(model.cond_prob("país", ["de","cada"]))
 
     # save it
     filename = opts['-o']
