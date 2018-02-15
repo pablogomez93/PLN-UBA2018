@@ -14,11 +14,20 @@ class NGramGenerator(object):
         probs = defaultdict(dict)
         # WORK HERE!!
 
+        for tokens in model._count.keys():
+            if len(tokens) == self._n:
+                token = tokens[self._n-1]
+                prevs = tokens[:-1]
+                probs[prevs][token] = model.cond_prob(token, tuple(prevs))
+
         self._probs = dict(probs)
 
         # sort in descending order for efficient sampling
         self._sorted_probs = sorted_probs = {}
+
         # WORK HERE!!
+        for key in probs:
+            sorted_probs[key] = sorted(probs[key].items())
 
     def generate_sent(self):
         """Randomly generate a sentence."""
