@@ -155,10 +155,7 @@ class AddOneNGram(NGram):
         # compute vocabulary
         self._voc = voc = set()
         # WORK HERE!!
-        for sent in sents:
-            for token in sent:
-                voc.add(token)
-        voc.add("</s>")
+        compute_vocabulary(sents, voc)
 
         self._V = len(voc)  # vocabulary size
 
@@ -189,6 +186,12 @@ class AddOneNGram(NGram):
 
         return 0.0 if denominator == 0 else numerator / denominator
 
+
+def compute_vocabulary(sents, voc):
+    for sent in sents:
+        for token in sent:
+            voc.add(token)
+    voc.add("</s>")
 
 class InterpolatedNGram(NGram):
 
@@ -222,6 +225,7 @@ class InterpolatedNGram(NGram):
             print('Computing vocabulary...')
             self._voc = voc = set()
             # WORK HERE!!
+            compute_vocabulary(sents, voc)
 
             self._V = len(voc)
 
