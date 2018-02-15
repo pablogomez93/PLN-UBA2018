@@ -80,15 +80,15 @@ class NGram(LanguageModel):
         token -- the token.
         prev_tokens -- the previous n-1 tokens (optional only if n = 1).
         """
+        if not prev_tokens:
+            # if prev_tokens not given, assume 0-uple:
+            prev_tokens = ()
+        assert len(prev_tokens) == self._n - 1
 
         # WORK HERE!!
-        if prev_tokens is not None:
-            numerator = self.count(prev_tokens + (token,))
-            denominator = self.count(prev_tokens)
-        else:
-            numerator = self.count((token,))
-            denominator = self._tokens_count
-
+        numerator = self.count(prev_tokens + (token,))
+        denominator = self.count(prev_tokens)
+        
         return 0.0 if denominator == 0 else numerator / denominator
 
     def prob_of_each_ngram_in_a_sentence(self, sent):
