@@ -51,12 +51,25 @@ class NGramGenerator(object):
         prev_tokens -- the previous n-1 tokens (optional only if n = 1).
         """
         n = self._n
+
         if not prev_tokens:
             prev_tokens = ()
         assert len(prev_tokens) == n - 1
 
-        r = random.random()
         probs = self._sorted_probs[prev_tokens]
-        # WORK HERE!!
 
-        return token
+        # WORK HERE!!
+        return sample(probs)
+
+
+def sample(problist):
+    r = random.random()
+    i = 0
+    word, prob = problist[0]
+    acum = prob
+    while r > acum:
+        i += 1
+        word, prob = problist[i]
+        acum += prob
+
+    return word
