@@ -18,14 +18,14 @@ import pickle
 import nltk
 
 # from nltk.corpus import gutenberg
-from languagemodeling.ngram import NGram, AddOneNGram
+from languagemodeling.ngram import NGram, AddOneNGram, InterpolatedNGram
 # from languagemodeling.ngram import NGram, AddOneNGram, InterpolatedNGram
 
 
 models = {
     'ngram': NGram,
     'addone': AddOneNGram,
-#     'inter': InterpolatedNGram,
+    'inter': InterpolatedNGram
 }
 
 if __name__ == '__main__':
