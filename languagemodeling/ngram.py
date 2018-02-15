@@ -180,6 +180,14 @@ class AddOneNGram(NGram):
         assert len(prev_tokens) == n - 1
 
         # WORK HERE!!
+        if prev_tokens is not None:
+            numerator = self.count(prev_tokens + (token,)) + 1
+            denominator = self.count(prev_tokens) + self.V()
+        else:
+            numerator = self.count((token,))
+            denominator = self._tokens_count
+
+        return 0.0 if denominator == 0 else numerator / denominator
 
 
 class InterpolatedNGram(NGram):
