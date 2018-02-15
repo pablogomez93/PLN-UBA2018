@@ -38,6 +38,10 @@ class NGramGenerator(object):
         token = self.generate_token(tuple(prev_tokens))
         while token != '</s>':
             # WORK HERE!!
+            sent.append(token)
+            new_nminus1gram = prev_tokens[1:] + [token]
+            prev_tokens = new_nminus1gram[(len(new_nminus1gram)-(n-1)):]
+            token = self.generate_token(tuple(prev_tokens))
 
         return sent
 
