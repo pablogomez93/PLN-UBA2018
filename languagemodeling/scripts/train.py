@@ -34,7 +34,6 @@ if __name__ == '__main__':
     corpusReader = nltk.corpus.reader.plaintext.PlaintextCorpusReader
     corpus = corpusReader("../corpus/darwin", "las5obras.txt")
     sents = corpus.sents()
-    print(sents)
 
     # train the model
     n = int(opts['-n'])
