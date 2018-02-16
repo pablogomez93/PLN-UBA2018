@@ -230,6 +230,22 @@ class InterpolatedNGram(NGram):
         print('Computing counts...')
         # WORK HERE!!
         # COMPUTE COUNTS FOR ALL K-GRAMS WITH K <= N
+        count_kgrams = defaultdict(int)
+
+        for sent in train_sents:
+
+            # 0-GRAMS
+            count_kgrams[tuple()] += len(sent) + 1 # + 1 because we need to count the token </s> that I will append to the sentence later 
+
+            # K-GRAMS WITH 1 <= K <= N
+            for j in range(1, n+1):
+                sent = self.add_start_and_end_of_sentence(sent, j)
+
+                for i in range(len(sent) - j + 1):
+                    ngram = tuple(sent[i:i+j])
+                    count_kgrams[ngram] += 1
+
+        self.count_kgrams = count_kgrams
 
         # compute vocabulary size for add-one in the last step
         self._addone = addone
