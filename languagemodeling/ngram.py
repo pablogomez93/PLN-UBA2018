@@ -85,6 +85,18 @@ class NGram(LanguageModel):
             prev_tokens = ()
         assert len(prev_tokens) == self._n - 1
 
+        return self.cond_prob_ml(token, prev_tokens)
+
+    def cond_prob_ml(self, token, prev_tokens=None):
+        """Conditional probability of a token using the maximum likelihood estimation
+
+        token -- the token.
+        prev_tokens -- the previous n-1 tokens (optional only if n = 1).
+        """
+        if not prev_tokens:
+            # if prev_tokens not given, assume 0-uple:
+            prev_tokens = ()
+
         # WORK HERE!!
         numerator = self.count(prev_tokens + (token,))
         denominator = self.count(prev_tokens)
