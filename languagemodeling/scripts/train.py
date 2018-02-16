@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     # load the data
     corpusReader = nltk.corpus.reader.plaintext.PlaintextCorpusReader
-    corpus = corpusReader("../corpus/darwin", "las5obras.txt")
+    corpus = corpusReader("./languagemodeling/corpus/darwin", "las5obras.txt")
     sents = corpus.sents()
 
     # train the model
