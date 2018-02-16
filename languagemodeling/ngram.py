@@ -253,7 +253,7 @@ class InterpolatedNGram(NGram):
             print('Computing vocabulary...')
             self._voc = voc = set()
             # WORK HERE!!
-            compute_vocabulary(sents, voc)
+            compute_vocabulary(train_sents, voc)
 
             self._V = len(voc)
 
@@ -283,6 +283,7 @@ class InterpolatedNGram(NGram):
         tokens -- the k-gram tuple.
         """
         # WORK HERE!! (JUST A RETURN STATEMENT)
+        return self.count_kgrams.get(tokens, 0)
 
     def cond_prob(self, token, prev_tokens=None):
         """Conditional probability of a token.
