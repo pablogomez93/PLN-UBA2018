@@ -302,15 +302,29 @@ class InterpolatedNGram(NGram):
         tokens = prev_tokens + (token,)
         prob = 0.0
         cum_lambda = 0.0  # sum of previous lambdas
+
         for i in range(n):
             # i-th term of the sum
             if i < n - 1:
                 # COMPUTE lambdaa AND cond_ml.
-                pass
+                igram_count = self.count(prev_tokens[i:])
+                lambdaa = (1 - cum_lambda) * igram_count / (igram_count + self._gamma) 
+                
+                cond_ml = self.cond_prob_ml(token, prev_tokens[i:])
+
             else:
                 # COMPUTE lambdaa AND cond_ml.
+                lambdaa = (1 - cum_lambda)
+                
                 # LAST TERM: USE ADD ONE IF NEEDED!
-                pass
+                if self._addone:
+                    numerator = self.count((token,)) + 1
+                    denominator = self.count(tuple()) + self._V
+                    
+                    cond_ml = 0.0 if denominator == 0 else numerator / denominator
+
+                else:
+                    cond_ml = self.cond_prob_ml(token)
 
             prob += lambdaa * cond_ml
             cum_lambda += lambdaa
