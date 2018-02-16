@@ -55,7 +55,7 @@ class NGram(LanguageModel):
 
         # WORK HERE!!
         for sent in sents:
-            sent = self.add_start_and_end_of_sentence(sent)
+            sent = self.add_start_and_end_of_sentence(sent, n)
 
             for i in range(len(sent) - n + 1):
                 ngram = tuple(sent[i:i+n])
@@ -123,18 +123,18 @@ class NGram(LanguageModel):
         sent -- the sentence as a list of tokens.
         """
         # WORK HERE!!
-        sent = self.add_start_and_end_of_sentence(sent)
+        sent = self.add_start_and_end_of_sentence(sent, self._n)
 
         estimated_probabilities = self.prob_of_each_ngram_in_a_sentence(sent)
         return functools.reduce(operator.mul, estimated_probabilities, 1.0)
 
-    def add_start_and_end_of_sentence(self, sent):
+    def add_start_and_end_of_sentence(self, sent, ngram_order):
         """ If n is the order of the model, add <s> n-1 times before the sentence
             and </s> and the end of it
 
             sent -- the sentence as a list of tokens
         """
-        return (["<s>"]*(self._n-1)) + sent + ["</s>"]
+        return (["<s>"]*(ngram_order-1)) + sent + ["</s>"]
 
     def sent_log_prob(self, sent):
         """Log-probability of a sentence.
@@ -142,7 +142,7 @@ class NGram(LanguageModel):
         sent -- the sentence as a list of tokens.
         """
         # WORK HERE!!
-        sent = self.add_start_and_end_of_sentence(sent)
+        sent = self.add_start_and_end_of_sentence(sent, self._n)
 
         probs = self.prob_of_each_ngram_in_a_sentence(sent)
         log_probs = list(map(extended_log2, probs))
