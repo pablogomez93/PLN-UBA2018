@@ -66,4 +66,6 @@ CHEQUEO DEL GAMMA
 
 
 
-Finalmente, para que este suavizado tenga sentido, necesitamos sobreescribir el método *cond_prob* de la super clase __Ngram__, para que se compute el calculo de los λ<sub>k</sub>, se realize el chequeo de los parámetros lambda. Esto lo hicimos creando cada término de la probabilidad condicional final, que será λ<sub>k</sub> * qMLk(tokens)
+Finalmente, para que este suavizado tenga sentido, necesitamos sobreescribir el método *cond_prob* de la super clase __Ngram__ para que se compute el cálculo de los λ<sub>k</sub> y se multiplique por la probabilidad condicional del k-grama, que, salvo en el último caso, es la maximum likelihood estimation, tal como se exploca en el punto 1 en las [Notas complementarias a las notas de Michael Collins](https://cs.famaf.unc.edu.ar/~francolq/lm-notas.pdf).<br>
+Para la última iteración, sin embargo, no siempre se utiliza la maximum likelihood estimation usadq en el modelo de __Ngram__, sino que se puede optar por usar la probabilidad condicional usada en el modelo __AddOneNGram__. 
+Hay un ciclo principal encargado de computar todas las iteraciones correspondientes a la sumatoria principal del cálculo explicado en esas mismas notas, que hace diferencia entre la último iteración y las previas.
