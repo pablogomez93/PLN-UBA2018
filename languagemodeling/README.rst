@@ -37,7 +37,7 @@ Estos son algunos ejemplo de oraciones generadas aleatoriamente por un modelo de
 | Unigramas | in to excites is diagram parents to disappeared allied Mankind for recently generations the of much birds a struck of the about or B , may Hence colours influence wholly round accords  <br><br> than fact modified case become the between a <br><br> of of Our growth <br><br> and very being a are represents , of attacks a when small . Mollusca . of : has greater three from ausstossend why the it simple Steele , as <br><br> channels summer time evidently were the . at , it treat water body of 2 and of|
 | Bigramas | Knight . <br><br> Again , which I hear of man . <br><br> It is developed and in the interior higher groups , are beetles , palæontological discovery of variation may infer that Professor : yet the other remains thus generally cause that the aid of the females . <br><br> Finally , similar manner as the attempt to find , 1841 , the dog - rat ; or action for instance , in the arms alone had only slightly different aspect of mature state of cacti and had been seen that the square miles in nearly the male which tables further southwards or was actually confluent , slowly varying or South America . <br><br> In what geology tells us in spiritual agencies more on the actual amount of egg in some hard upon population is perhaps we need not doubt there will pretend to those which " monarch .  |
 | Trigramas | According to this part extinct , 111 . <br><br> In this class the male , for some time , or amazement is felt . <br><br> Difficulties on the stridulation of Mononychus pseudacori . <br><br> The cause of the hemisphere . <br><br> But the foregoing .|
-| Quadrigramas | ( 16 . <br><br> Now , it is obvious that the saline incrustation on the rocks for dropping a basket of sea - shells , toads and lizards were all lying torpid beneath stones . <br><br> Either , firstly , that whether this assertion be true or false , it has long been known what enormous ranges many fresh - water ; and an English philosopher goes so far as I am informed by him , a young ram , born on Feb . 10th , first shewed horns on March 6th , so that they will have been almost necessarily accumulated at wide and irregularly intermittent intervals ; consequently the two latter trees . <br><br> It is highly probable , be taken advantage of by natural selection ; cases of instincts almost identically the same should ever have suspected how poor a record of the lines has been attempted by some authors that the Birgos crawls up the cocoa - nut . <br><br> On the Gorilla , Savage and Wyman , ' Observations in Natural History ,' vol .  |
+| Cuadrigramas | ( 16 . <br><br> Now , it is obvious that the saline incrustation on the rocks for dropping a basket of sea - shells , toads and lizards were all lying torpid beneath stones . <br><br> Either , firstly , that whether this assertion be true or false , it has long been known what enormous ranges many fresh - water ; and an English philosopher goes so far as I am informed by him , a young ram , born on Feb . 10th , first shewed horns on March 6th , so that they will have been almost necessarily accumulated at wide and irregularly intermittent intervals ; consequently the two latter trees . <br><br> It is highly probable , be taken advantage of by natural selection ; cases of instincts almost identically the same should ever have suspected how poor a record of the lines has been attempted by some authors that the Birgos crawls up the cocoa - nut . <br><br> On the Gorilla , Savage and Wyman , ' Observations in Natural History ,' vol .  |
 
 
 __Ejercicio 4__
@@ -50,25 +50,34 @@ Una vez hecho esto, el calculo de *cond_prob* es igual que en el modelo sin suav
 
 __Ejercicio 5__
 
-python3 languagemodeling/scripts/eval.py -i languagemodeling/models/AddOneModel-Unigrams-train90.o
-Log probability: -1312250.6666830217
-Cross entropy: 9.27202155533196
-Perplexity: 618.2392998963254
+Para este ejercicio se partió el corpus total en 2 conjuntos de training y test. Ambos están en
+*languagemodeling/corpus/darwin/* con los nombres *test10.txt* y *training90.txt* 
 
-python3 languagemodeling/scripts/eval.py -i languagemodeling/models/AddOneModel-Bigrams-train90.o
-Log probability: -1418665.8623286206
-Cross entropy: 10.023923621676422
-Perplexity: 1041.1221455075063
+Luego, se entrenó el modelo __AddOneNGram__ con el script *train.py* para el corpus *training90.txt* recién mencionado, para Unigramas, Bigramas, Trigramas y Quadrigramas. Estos modelos se guardaron en *languagemodeling/models/*.<br>
 
-python3 languagemodeling/scripts/eval.py -i languagemodeling/models/AddOneModel-Trigrams-train90.o
-Log probability: -1747458.699843565
-Cross entropy: 12.347088207588357
-Perplexity: 5210.0742142037525
+Finalmente, usando el script *eval.py* se calculó la *Log probability*, la *Cross entropy* y la *Perplexity* del corpus de test, usando como modelos a cada uno de los 4 entrenados con el 90% del corpus total.
 
-python3 languagemodeling/scripts/eval.py -i languagemodeling/models/AddOneModel-Quadrigrams-train90.o
-Log probability: -1858179.8749483745
-Cross entropy: 13.129415203693789
-Perplexity: 8960.820996466666
+Los resultados fueron los siguientes:
+
+__Unigramas__ (entrenado con el 90% del corpus total):
+* *Log probability*: -1312250.6666830217
+* *Cross entropy*: 9.27202155533196
+* *Perplexity*: 618.2392998963254
+
+__Bigramas__ (entrenado con el 90% del corpus total):
+* *Log probability*: -1418665.8623286206
+* *Cross entropy*: 10.023923621676422
+* *Perplexity*: 1041.1221455075063
+
+__Trigramas__ (entrenado con el 90% del corpus total):
+* *Log probability*: -1747458.699843565
+* *Cross entropy*: 12.347088207588357
+* *Perplexity*: 5210.0742142037525
+
+__Cuadrigramas__ (entrenado con el 90% del corpus total):
+* *Log probability*: -1858179.8749483745
+* *Cross entropy*: 13.129415203693789
+* *Perplexity*: 8960.820996466666
 
 
 
