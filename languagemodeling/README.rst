@@ -50,6 +50,25 @@ Una vez hecho esto, el calculo de *cond_prob* es igual que en el modelo sin suav
 
 __Ejercicio 5__
 
+python3 languagemodeling/scripts/eval.py -i languagemodeling/models/AddOneModel-Unigrams-train90.o
+Log probability: -1312250.6666830217
+Cross entropy: 9.27202155533196
+Perplexity: 618.2392998963254
+
+python3 languagemodeling/scripts/eval.py -i languagemodeling/models/AddOneModel-Bigrams-train90.o
+Log probability: -1418665.8623286206
+Cross entropy: 10.023923621676422
+Perplexity: 1041.1221455075063
+
+python3 languagemodeling/scripts/eval.py -i languagemodeling/models/AddOneModel-Trigrams-train90.o
+Log probability: -1747458.699843565
+Cross entropy: 12.347088207588357
+Perplexity: 5210.0742142037525
+
+python3 languagemodeling/scripts/eval.py -i languagemodeling/models/AddOneModel-Quadrigrams-train90.o
+Log probability: -1858179.8749483745
+Cross entropy: 13.129415203693789
+Perplexity: 8960.820996466666
 
 
 
