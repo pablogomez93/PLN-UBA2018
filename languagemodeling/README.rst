@@ -1,5 +1,5 @@
 Descripción de la solución de los ejercicios
------------
+========
 __Ejercicio 1__
 
 Para este ejercicio utilizé la clase __nltk.corpus.reader.plaintext.PlaintextCorpusReader__ para la tokenización, que para el corpus elegido arrojó una aceptable. El corpus elegido son 5 obras de Charles Darwin contenidas en un único archivo (5,3 MB) llamado **las5obras.txt**, que se encuentra en el directorio */languagemodeling/corpus/darwin/*. También, en el mismo directorio, pueden encontrarse las 5 obras que componen al archivo mencionado en archivos separados.
@@ -12,13 +12,23 @@ El proceso de agregar marcadores de comienzo y fin de oración está abstraído 
 
 El computo de la probabilidad condicional de un token dado sus tokens previos, está *forwardeado* al método *cond_prob_ml*. Esto es porque de esta forma puedo obtener la probabilidad condicional usando maximum likelihood estimation desde una instancia de la clase **InterpolatedNGram**, ya que no puedo usar el método de instancia *cond_prob* ya que esta última clase lo *overridea*.
 
-Para el método *sent_prob* lo que hice fue llamar a *self.cond_prob* para todo n-grama de la oración recibida, y luego hacer la multiplicación de todos estos valores, haciendo un *reduce* de Python 3, que es un *fold* en términos de programación funcional. Hice el método *prob_of_each_ngram_in_a_sentence* que devuelve un arreglo con todas las probabilidades de todos los n-gramas de la oración, para no repetir código con el siguiente método.
+Para el método *sent_prob* lo que hice fue llamar a *self.cond_prob* para todo n-grama de la oración recibida (esto lo hice aprovechando el fragmento de código disponible en el [Jupyter Notebook provisto](http://nbviewer.jupyter.org/url/cs.famaf.unc.edu.ar/~francolq/Modelado%20de%20Lenguaje.ipynb#Contando-N-Gramas)), y luego hacer la multiplicación de todos estos valores, haciendo un *reduce* de Python 3, que es un *fold* en términos de programación funcional. Hice el método *prob_of_each_ngram_in_a_sentence* que devuelve un arreglo con todas las probabilidades de todos los n-gramas de la oración, para no repetir código con el siguiente método.
 
 Y para el método *sent_log_prob* utilicé el método *prob_of_each_ngram_in_a_sentence* antes mencionado y luego un *map* aplicando log2 a cada probabilidad, para luego hacer otro fold, pero esta vez con la operación de la suma, para sumar los logaritmos de las probabilidades, ya que *log<sub>n</sub>(x\*y) = log<sub>n</sub>(x) + log<sub>n</sub>(y)*.
 
 __Ejercicio 3__
 
-Oraciones generadas:
+Cuando construímos un NGramGenerator, armamos un diccionario que para todo (n-1 grama) visto en tiempo de entrenamiento guarda otro diccionario que contiene cada posible token siguiente, con su probabilidad de aparecer). Usamos *model.cond_prob* para obtener dichas probabilidades. Además ordenamos dichas probabilidades en orden creciente para utilizar luego este orden.
+
+Es decir, el diccionario es: <br>
+*__{__ (n-1)-grama -> __{__ token -> probabilidad __}__ __}__* donde *probabilidad* es *model.cond_prob(token, (n-1)-grama)*.
+
+Este diccionario nos será útil tenerlo precomputado ya que para el método *generate_token*, se elije el token siguiente de un conjunto de tokens previos basandose en los posibles siguientes tokens, teniendo en cuenta la probabilidad de cada uno. Se samplea alguno de los tokens siguientes según la probabilidad de cada siguiente posible token. Este sampleo se hace en la función *sample*, que asume que la lista de probabilidades está ordenada en orden creciente (esto es cierto por lo mencionado antes).
+
+Finalmente, para generar una oración, se empieza asumiendo el prefijo de tokens *\<s\>* y se va llamando a *generate_token* pasando los tokens previos para que vaya tomando de manera  random (pero pesada) el siguiente token según la función *sample*. Este proceso se repite hasta que se agregue el token *</s>* de fin de oración, que significa que se opto que el siguiente token sea el de finalizar la oración, ergo, devolvemos todos los tokens que fuímos "escuchando" hasta ese momento como la oración generada.<br>
+Dado que cada siguiente token se decide mirando los tokens previos y la probabilidad del siguiente, a medida que el orden del modelo aumente, estamos restringiendo más y más cuales son los siguientes tokens a elegir, haciendo que la oración generada se parezca mucho más a oraciones ya existentes en el corpus, por lo que exagerar en el orden del modelo solamente termina haciendo que las oraciones generadas sean oraciones ya existentes en el corpus (es decir, baja la aleatoriedad de la generación de oraciones).
+
+Estos son algunos ejemplo de oraciones generadas aleatoriamente por un modelo de unigramas, bigramas, trigramas y cuatrigramas:
 
 | n-grams |  Oraciones del lenguaje natural generadas por el modelo |
 | --- |---|
@@ -26,5 +36,3 @@ Oraciones generadas:
 | Bigramas | Knight . <br><br> Again , which I hear of man . <br><br> It is developed and in the interior higher groups , are beetles , palæontological discovery of variation may infer that Professor : yet the other remains thus generally cause that the aid of the females . <br><br> Finally , similar manner as the attempt to find , 1841 , the dog - rat ; or action for instance , in the arms alone had only slightly different aspect of mature state of cacti and had been seen that the square miles in nearly the male which tables further southwards or was actually confluent , slowly varying or South America . <br><br> In what geology tells us in spiritual agencies more on the actual amount of egg in some hard upon population is perhaps we need not doubt there will pretend to those which " monarch .  |
 | Trigramas | According to this part extinct , 111 . <br><br> In this class the male , for some time , or amazement is felt . <br><br> Difficulties on the stridulation of Mononychus pseudacori . <br><br> The cause of the hemisphere . <br><br> But the foregoing .|
 | Quadrigramas | ( 16 . <br><br> Now , it is obvious that the saline incrustation on the rocks for dropping a basket of sea - shells , toads and lizards were all lying torpid beneath stones . <br><br> Either , firstly , that whether this assertion be true or false , it has long been known what enormous ranges many fresh - water ; and an English philosopher goes so far as I am informed by him , a young ram , born on Feb . 10th , first shewed horns on March 6th , so that they will have been almost necessarily accumulated at wide and irregularly intermittent intervals ; consequently the two latter trees . <br><br> It is highly probable , be taken advantage of by natural selection ; cases of instincts almost identically the same should ever have suspected how poor a record of the lines has been attempted by some authors that the Birgos crawls up the cocoa - nut . <br><br> On the Gorilla , Savage and Wyman , ' Observations in Natural History ,' vol .  |
-
-
