@@ -4,6 +4,7 @@ __Ejercicio 1__
 
 Para este ejercicio utilizé la clase __nltk.corpus.reader.plaintext.PlaintextCorpusReader__ para la tokenización, que para el corpus elegido arrojó una aceptable. El corpus elegido son 5 obras de Charles Darwin contenidas en un único archivo (5,3 MB) llamado **las5obras.txt**, que se encuentra en el directorio */languagemodeling/corpus/darwin/*. También, en el mismo directorio, pueden encontrarse las 5 obras que componen al archivo mencionado en archivos separados.
 
+
 __Ejercicio 2__
 
 En este ejercicio, al momento de construir el objeto NGram, se precomputa el conteo de cada n-gram y de cada (n-1)-gram de todo el corpus, guardandose los valores en un diccionario que tiene como clave al n-gram/(n-1)-gram y como valor la cantidad de ocurrencias que tuvo en el corpus. Este diccionario tiene como valor por default al 0, esto es muy útil para que se pueda consultar por cualquier k-grama, independientemente de si el mismo se vio en tiempo de entrenamiento o no, sin necesidad de guardar todo posible k-grama (número combinatorio gigantesco).
@@ -15,6 +16,7 @@ El computo de la probabilidad condicional de un token dado sus tokens previos, e
 Para el método *sent_prob* lo que hice fue llamar a *self.cond_prob* para todo n-grama de la oración recibida (esto lo hice aprovechando el fragmento de código disponible en el [Jupyter Notebook provisto](http://nbviewer.jupyter.org/url/cs.famaf.unc.edu.ar/~francolq/Modelado%20de%20Lenguaje.ipynb#Contando-N-Gramas)), y luego hacer la multiplicación de todos estos valores, haciendo un *reduce* de Python 3, que es un *fold* en términos de programación funcional. Hice el método *prob_of_each_ngram_in_a_sentence* que devuelve un arreglo con todas las probabilidades de todos los n-gramas de la oración, para no repetir código con el siguiente método.
 
 Y para el método *sent_log_prob* utilicé el método *prob_of_each_ngram_in_a_sentence* antes mencionado y luego un *map* aplicando log2 a cada probabilidad, para luego hacer otro fold, pero esta vez con la operación de la suma, para sumar los logaritmos de las probabilidades, ya que *log<sub>n</sub>(x\*y) = log<sub>n</sub>(x) + log<sub>n</sub>(y)*.
+
 
 __Ejercicio 3__
 
@@ -44,3 +46,24 @@ En el suavizado *Add-one* lo único que cambia es que se suaviza la distribució
 Por lo que lo único que cambia en este modelo es que necesitamos computar V, lo cual lo hacemos agregando cada token a un set y luego tomando su cardinalidad.
 
 Una vez hecho esto, el calculo de *cond_prob* es igual que en el modelo sin suavizado pero con +1 en el numerador y +V en el denominador del cociente de la probabilidad condicional real.
+
+
+__Ejercicio 5__
+
+
+
+
+__Ejercicio 6__
+
+La idea principal de un suavizado por interpolado es la de no solo trabajar con los n y los (n-1) gramas, sino, trabajar con los (n-2)-gramas...trigramas, bigramas y unigramas al momento de tomar la probabilidad condicional de una secuencia de tokens. La idea es asignar un coeficiente (una importancia) a cada uno de esos k-gramas (k <= n) para poder obtener información de todos ellos al momento de calcular esta probabilidad. El problema se traduce entonces en hallar, para el n-grama recibido, estos coeficientes, que denotaremos con λ<sub>0</sub>, λ<sub>1</sub>, λ<sub>2</sub>, ..., λ<sub>n</sub>.
+Además, existen simplificaciones en las que estos parámetros pueden modelarse como función de un único hiperparámetro γ, esta es la que vamos a usar para obtener los distintos λ<sub>k</sub>.
+
+Para el modelado del suavizado por Interpolación extendimos la clase Ngram con la clase __InterpolatedNGram__. Para el objetivo de este suavizado, fue necesario calcular todos los k-gramas con k <= n, con n el orden del modelo. Esto lo hacemos en el constructor de la misma clase, de manera muy similar a como lo hicimos en la clase __Ngram__. Este diccionario de conteos es muy similar al de el modelo de ngrams sin suavizado; una vez computado, queda guardada la referencia al mismo en la variable de instancia *count_kgrams*.
+
+Además, como en el nivel más bajo (unigramas) debemos aplicar el modelo Add-One necesitamos calcular el cardinal del vocabulario del conjunto de entrenamiento. Para esto se modularizó esa parte del código de la clase __AddOneNGram__ para poder reutilizarlo.
+
+CHEQUEO DEL GAMMA
+
+
+
+Finalmente, para que este suavizado tenga sentido, necesitamos sobreescribir el método *cond_prob* de la super clase __Ngram__, para que se compute el calculo de los λ<sub>k</sub>, se realize el chequeo de los parámetros lambda. Esto lo hicimos creando cada término de la probabilidad condicional final, que será λ<sub>k</sub> * qMLk(tokens)
