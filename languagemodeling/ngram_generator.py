@@ -67,7 +67,7 @@ def sample(problist):
     i = 0
     word, prob = problist[0]
     acum = prob
-    while r > acum:
+    while r > acum and i < len(problist)-1:
         i += 1
         word, prob = problist[i]
         acum += prob
