@@ -2,7 +2,7 @@ Descripción de la solución de los ejercicios
 ========
 __Ejercicio 1__
 
-Para este ejercicio utilizé la clase __nltk.corpus.reader.plaintext.PlaintextCorpusReader__ para la tokenización, que para el corpus elegido arrojó una aceptable. El corpus elegido son 5 obras de Charles Darwin contenidas en un único archivo (5,3 MB) llamado **las5obras.txt**, que se encuentra en el directorio */languagemodeling/corpus/darwin/*. También, en el mismo directorio, pueden encontrarse las 5 obras que componen al archivo mencionado en archivos separados.
+Para este ejercicio utilicé la clase __nltk.corpus.reader.plaintext.PlaintextCorpusReader__ para la tokenización, que para el corpus elegido arrojó una aceptable. El corpus elegido son 5 obras de Charles Darwin contenidas en un único archivo (5,3 MB) llamado **las5obras.txt**, que se encuentra en el directorio */languagemodeling/corpus/darwin/*. También, en el mismo directorio, pueden encontrarse las 5 obras que componen al archivo mencionado en archivos separados.
 
 
 __Ejercicio 2__
