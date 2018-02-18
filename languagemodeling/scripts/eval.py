@@ -13,7 +13,7 @@ import pickle
 import math
 import nltk
 
-from nltk.corpus import gutenberg
+# from nltk.corpus import gutenberg
 
 
 if __name__ == '__main__':
