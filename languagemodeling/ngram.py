@@ -100,7 +100,7 @@ class NGram(LanguageModel):
         # WORK HERE!!
         numerator = self.count(prev_tokens + (token,))
         denominator = self.count(prev_tokens)
-        
+
         return 0.0 if denominator == 0 else numerator / denominator
 
     def prob_of_each_ngram_in_a_sentence(self, sent):
@@ -205,6 +205,7 @@ def compute_vocabulary(sents, voc):
             voc.add(token)
     voc.add("</s>")
 
+
 class InterpolatedNGram(NGram):
 
     def __init__(self, n, sents, gamma=None, addone=True):
@@ -235,7 +236,7 @@ class InterpolatedNGram(NGram):
         for sent in train_sents:
 
             # 0-GRAMS
-            count_kgrams[tuple()] += len(sent) + 1 # + 1 because we need to count the token </s> that I will append to the sentence later 
+            count_kgrams[tuple()] += len(sent) + 1  # + 1 because the '</s>'
 
             # K-GRAMS WITH 1 <= K <= N
             for j in range(1, n+1):
@@ -266,7 +267,7 @@ class InterpolatedNGram(NGram):
             min_gamma, min_p = None, float('inf')
 
             # WORK HERE!! TRY DIFFERENT VALUES BY HAND:
-            for gamma in [i/100 for i in range(1,100)]:
+            for gamma in [i/100 for i in range(1, 100)]:
                 self._gamma = gamma
                 p = self.perplexity(held_out_sents)
                 print('  {} -> {}'.format(gamma, p))
@@ -299,7 +300,6 @@ class InterpolatedNGram(NGram):
 
         # WORK HERE!!
         # SUGGESTED STRUCTURE:
-        tokens = prev_tokens + (token,)
         prob = 0.0
         cum_lambda = 0.0  # sum of previous lambdas
 
@@ -308,20 +308,20 @@ class InterpolatedNGram(NGram):
             if i < n - 1:
                 # COMPUTE lambdaa AND cond_ml.
                 igram_count = self.count(prev_tokens[i:])
-                lambdaa = (1 - cum_lambda) * igram_count / (igram_count + self._gamma) 
-                
+                lambdaa = (1-cum_lambda)*igram_count/(igram_count+self._gamma)
+
                 cond_ml = self.cond_prob_ml(token, prev_tokens[i:])
 
             else:
                 # COMPUTE lambdaa AND cond_ml.
                 lambdaa = (1 - cum_lambda)
-                
+
                 # LAST TERM: USE ADD ONE IF NEEDED!
                 if self._addone:
-                    numerator = self.count((token,)) + 1
-                    denominator = self.count(tuple()) + self._V
-                    
-                    cond_ml = 0.0 if denominator == 0 else numerator / denominator
+                    num = self.count((token,)) + 1
+                    denom = self.count(tuple()) + self._V
+
+                    cond_ml = 0.0 if denom == 0 else num / denom
 
                 else:
                     cond_ml = self.cond_prob_ml(token)
