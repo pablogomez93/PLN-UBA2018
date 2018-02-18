@@ -266,7 +266,7 @@ class InterpolatedNGram(NGram):
             min_gamma, min_p = None, float('inf')
 
             # WORK HERE!! TRY DIFFERENT VALUES BY HAND:
-            for gamma in [i/100 for i in range(1,11)]:
+            for gamma in [i/100 for i in range(1,100)]:
                 self._gamma = gamma
                 p = self.perplexity(held_out_sents)
                 print('  {} -> {}'.format(gamma, p))
