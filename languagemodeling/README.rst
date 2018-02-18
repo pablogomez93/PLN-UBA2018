@@ -90,9 +90,23 @@ Para el modelado del suavizado por Interpolación extendimos la clase Ngram con 
 
 Además, como en el nivel más bajo (unigramas) debemos aplicar el modelo Add-One necesitamos calcular el cardinal del vocabulario del conjunto de entrenamiento. Para esto se modularizó esa parte del código de la clase __AddOneNGram__ para poder reutilizarlo.
 
-CHEQUEO DEL GAMMA
+Para el barrido de valores de γ probé varios rangos a mano. Después de esas pruebas, el rango que encontró un mínimo local/absoluto de la *perplexity* para un modelo de orden hasta 4 era el [0.01, 0.02, ..., 0.1, ..., 0.99, 1]. Es decir, el rango [0.01, 1.0] con steps de 0.01 (todas las centécimas de la unidad). Los valores de γ que minimizaban el valor de la *perplexity* fueron:
 
+Para un modelo de __Unigramas__:
+* *γ*: 0.01
+* *Perplexity*: 620.6565127176909
 
+Para un modelo de __Bigramas__:
+* *γ*: 0.37
+* *Perplexity*: 62.26781875344987
+
+Para un modelo de __Trigramas__:
+* *γ*: 0.08
+* *Perplexity*: 10.493021724987875
+
+Para un modelo de __Cuadrigramas__:
+* *γ*: 0.07
+* *Perplexity*: 3.0700259039262283
 
 Finalmente, para que este suavizado tenga sentido, necesitamos sobreescribir el método *cond_prob* de la super clase __Ngram__ para que se compute el cálculo de los λ<sub>k</sub> y se multiplique por la probabilidad condicional del k-grama, que, salvo en el último caso, es la maximum likelihood estimation, tal como se exploca en el punto 1 en las [Notas complementarias a las notas de Michael Collins](https://cs.famaf.unc.edu.ar/~francolq/lm-notas.pdf).<br>
 Para la última iteración, sin embargo, no siempre se utiliza la maximum likelihood estimation usadq en el modelo de __Ngram__, sino que se puede optar por usar la probabilidad condicional usada en el modelo __AddOneNGram__. 
