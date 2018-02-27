@@ -27,17 +27,36 @@ class MEMM:
         clf -- classifying model, one of 'svm', 'maxent', 'mnb' (default: 'svm').
         """
         # 1. build the pipeline
-        # WORK HERE!!
-        self._pipeline = pipeline = None
+        # WORK HERE!! 
+        self.n = n
+        basic_features = [word_lower, word_istitle, word_isupper, word_isdigit]
+        features = basic_features + [cf(f) for f in basic_features for cf in [PrevWord, NextWord]] + [NPrevTags(i) for i in range(1, self.n)]
+        vect = Vectorizer(features)
+        
+        self._pipeline = pipeline = Pipeline([
+            ('vect', vect),
+            ('clf', classifiers[clf]())
+        ])
+
+        histories = self.sents_histories(tagged_sents)
 
         # 2. train it
         print('Training classifier...')
-        X = self.sents_histories(tagged_sents)
-        y = self.sents_tags(tagged_sents)
+        tagged_sents_list = list(tagged_sents)
+        X = self.sents_histories(tagged_sents_list)
+        y = self.sents_tags(tagged_sents_list)
+
         pipeline.fit(list(X), list(y))
 
         # 3. build known words set
         # WORK HERE!!
+        voc = set()
+        for sent in tagged_sents:
+            for word, tag in sent:
+                voc.add(word)
+
+        self.vocabulary = voc
+
 
     def sents_histories(self, tagged_sents):
         """
