@@ -29,7 +29,7 @@ class POSStats:
         words_frequency = defaultdict(int)
         tags_frequency = defaultdict(int)
         count_of_words_by_tag = defaultdict(lambda: defaultdict(int))
-        count_of_tags_by_word = defaultdict(int)
+        count_of_tags_by_word = defaultdict(set)
         words_by_count_of_tags = defaultdict(set)
         sents_count = 0
         tokens_count = 0
@@ -41,10 +41,10 @@ class POSStats:
                 tags_frequency[t[1]] += 1
                 tokens_count += 1
                 count_of_words_by_tag[t[1]][t[0]] += 1
-                count_of_tags_by_word[t[0]] += 1
+                count_of_tags_by_word[t[0]].add(t[1])
 
-        for word, tags_count in count_of_tags_by_word.items():
-            words_by_count_of_tags[tags_count].add(word)
+        for word, tags in count_of_tags_by_word.items():
+            words_by_count_of_tags[len(tags)].add(word)
 
         # Export pre-computed statistics
         self.sents_count = sents_count
