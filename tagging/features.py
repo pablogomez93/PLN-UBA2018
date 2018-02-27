@@ -72,6 +72,8 @@ class NPrevTags(Feature):
         h -- a history.
         """
         # WORK HERE!!
+        prevs = h.prev_tags
+        return prevs[-self._n:]
 
 
 class PrevWord(Feature):
