@@ -30,7 +30,7 @@ class MEMM:
         # WORK HERE!! 
         self.n = n
         basic_features = [word_lower, word_istitle, word_isupper, word_isdigit]
-        features = basic_features + [cf(f) for f in basic_features for cf in [PrevWord, NextWord]] + [NPrevTags(i) for i in range(1, self.n)]
+        features = basic_features + [cf(f) for f in basic_features for cf in [PrevWord, NextWord]] + [NPrevTags(i) for i in range(1, self.n+1)]
         vect = Vectorizer(features)
         
         self._pipeline = pipeline = Pipeline([
