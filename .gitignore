@@ -1,0 +1,8 @@
+# Non extension files
+*
+!/**/
+!*.*
+
+._*
+__pycache__
+
