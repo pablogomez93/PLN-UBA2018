@@ -27,6 +27,7 @@ def prev_tags(h):
     # WORK HERE!!
     return h.prev_tags
 
+
 def word_istitle(h):
     """Feature: is the current word titlecased?
 
