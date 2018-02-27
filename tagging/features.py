@@ -15,6 +15,8 @@ def word_lower(h):
     h -- a history.
     """
     # WORK HERE!! USE STRING METHOD lower()
+    word = h.sent[h.i]
+    return word.lower()
 
 
 def prev_tags(h):
@@ -23,7 +25,7 @@ def prev_tags(h):
     h -- a history.
     """
     # WORK HERE!!
-
+    return h.prev_tags
 
 def word_istitle(h):
     """Feature: is the current word titlecased?
@@ -31,6 +33,8 @@ def word_istitle(h):
     h -- a history.
     """
     # WORK HERE!! USE STRING METHOD istitle()
+    word = h.sent[h.i]
+    return word.istitle()
 
 
 def word_isupper(h):
@@ -39,6 +43,8 @@ def word_isupper(h):
     h -- a history.
     """
     # WORK HERE!! USE STRING METHOD isupper()
+    word = h.sent[h.i]
+    return word.isupper()
 
 
 def word_isdigit(h):
@@ -47,6 +53,8 @@ def word_isdigit(h):
     h -- a history.
     """
     # WORK HERE!! USE STRING METHOD isdigit()
+    word = h.sent[h.i]
+    return word.isdigit()
 
 
 class NPrevTags(Feature):
