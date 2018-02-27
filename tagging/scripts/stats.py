@@ -46,20 +46,7 @@ class POSStats:
         for word, tags_count in count_of_tags_by_word.items():
             words_by_count_of_tags[tags_count].add(word)
 
-        most_frequent_tags = sorted(tags_frequency.items(), key=operator.itemgetter(1), reverse=True)[:10]
-        most_frequent_tags_data = {}
-        for tag, count in most_frequent_tags:
-            words = count_of_words_by_tag[tag]
-            words_with_count = sorted(words.items(), key=operator.itemgetter(1), reverse=True)[:5]
-            most_frequent_words = list(map(lambda x: x[0], words_with_count))
-
-            most_frequent_tags_data[tag] = {
-                "count" : count,
-                "percentaje" : count / tokens_count,
-                "frequent_words" : most_frequent_words
-            }
-
-        # Export pre computed statistics
+        # Export pre-computed statistics
         self.sents_count = sents_count
         self.tokens_count = tokens_count
         self.words_frequency = words_frequency
@@ -68,7 +55,6 @@ class POSStats:
         self.tags_vocabulary = tags_frequency.keys()
         self._tcount = count_of_words_by_tag
         self.words_by_count_of_tags = words_by_count_of_tags
-        self.most_frequent_tags_data = most_frequent_tags_data
 
     def sent_count(self):
         """Total number of sentences."""
