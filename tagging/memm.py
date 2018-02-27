@@ -123,6 +123,7 @@ class MEMM:
         h -- the history.
         """
         # WORK HERE!!
+        return self._pipeline.predict([h])[0]
 
     def unknown(self, w):
         """Check if a word is unknown for the model.
@@ -130,3 +131,4 @@ class MEMM:
         w -- the word.
         """
         # WORK HERE!!
+        return w not in self.vocabulary
