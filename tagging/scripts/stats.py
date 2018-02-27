@@ -93,7 +93,7 @@ class POSStats:
         n -- number of tags.
         """
         # WORK HERE!!
-        return self.words_by_count_of_tags[1]
+        return self.words_by_count_of_tags[n]
 
     def tags(self):
         """POS Tagset."""
