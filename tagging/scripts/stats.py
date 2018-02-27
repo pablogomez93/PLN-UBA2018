@@ -9,7 +9,6 @@ Options:
 """
 from docopt import docopt
 from collections import defaultdict
-import operator
 
 from ancora import SimpleAncoraCorpusReader
 
@@ -85,7 +84,6 @@ class POSStats:
         """List of words with only one observed POS tag."""
         # WORK HERE!!
         return self.words_by_count_of_tags[1]
-
 
     def ambiguous_words(self, n):
         """List of words with n different observed POS tags.
