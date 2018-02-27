@@ -39,6 +39,28 @@ class BaselineTagger:
         default_tag -- tag for unknown words.
         """
         # WORK HERE!!
+        distinct_words = set()
+        count_tags_by_words = defaultdict(lambda: defaultdict(int))
+        for sent in tagged_sents:
+            for word_tag in sent:
+                distinct_words.add(word_tag[0])
+                count_tags_by_words[word_tag[0]][word_tag[1]] += 1
+
+        max_tag_by_word = defaultdict(lambda: default_tag)
+        for word in count_tags_by_words.keys():
+            tags = count_tags_by_words[word]
+
+            max_tag_count, max_tag = 0, default_tag
+            for tag in tags.keys():
+                tag_count = tags[tag]
+
+                if max_tag_count < tag_count:
+                    max_tag_count, max_tag = tag_count, tag
+
+            max_tag_by_word[word] = max_tag
+
+        self.max_tag_by_word = max_tag_by_word
+        self.distinct_words = distinct_words
 
     def tag(self, sent):
         """Tag a sentence.
@@ -53,6 +75,7 @@ class BaselineTagger:
         w -- the word.
         """
         # WORK HERE!!
+        return self.max_tag_by_word[w]
 
     def unknown(self, w):
         """Check if a word is unknown for the model.
@@ -60,3 +83,4 @@ class BaselineTagger:
         w -- the word.
         """
         # WORK HERE!!
+        return w not in self.distinct_words
