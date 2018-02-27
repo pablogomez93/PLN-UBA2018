@@ -104,6 +104,18 @@ class MEMM:
         sent -- the sentence.
         """
         # WORK HERE!!
+        ret_tag = []
+
+        for i in range(len(sent)):
+            if i == 0:
+                prevs = tuple("<s>") * (self.n - 1)
+            else:
+                prevs = (prevs + tuple(ret_tag[i-1]))[1:]
+
+            history = History(sent, prevs, i)
+            ret_tag += [self.tag_history(history)]
+
+        return ret_tag
 
     def tag_history(self, h):
         """Tag a history.
