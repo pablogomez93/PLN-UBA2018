@@ -46,9 +46,6 @@ __Ejercicio 2__
 100.0% (87.59% / 95.28% / 18.01%)<br>
 Accuracy: 87.59% / 95.28% / 18.01%
 
-__Ejercicio 3__
-========
-
 __Ejercicio 4__
 ========
 
@@ -79,3 +76,55 @@ Accuracy: 89.58% / 0.00% / 89.58%
 * Resultado de la evaluación:<br>
 100.0% (89.48% / 0.00% / 89.48%)<br>
 Accuracy: 89.48% / 0.00% / 89.48%
+
+**Memm, svm, n=1**:
+* Tiempo de entrenamiento: 4:58 minutos<br>
+* Tiempo de evaluación: 25 segundos
+* Resultado de la evaluación:<br>
+100.0% (94.11% / 0.00% / 94.11%)<br>
+Accuracy: 94.11% / 0.00% / 94.11%
+
+**Memm, svm, n=2**:
+* Tiempo de entrenamiento: 6:02 minutos<br>
+* Tiempo de evaluación: 27 segundos
+* Resultado de la evaluación:<br>
+100.0% (92.43% / 0.00% / 92.43%)<br>
+Accuracy: 92.43% / 0.00% / 92.43%
+
+**Memm, svm, n=3**:
+* Tiempo de entrenamiento: 7:11 minutos<br>
+* Tiempo de evaluación: 27 segundos
+* Resultado de la evaluación:<br>
+100.0% (92.27% / 0.00% / 92.27%)<br>
+Accuracy: 92.27% / 0.00% / 92.27%
+
+**Memm, svm, n=4**:
+* Tiempo de entrenamiento: 10:02 minutos<br>
+* Tiempo de evaluación: 28 segundos
+* Resultado de la evaluación:<br>
+100.0% (92.13% / 0.00% / 92.13%)<br>
+Accuracy: 92.13% / 0.00% / 92.13%
+
+**Memm, mnb, n=1**:
+* Tiempo de entrenamiento: 48 segundos<br>
+* Tiempo de evaluación: 1:05 horas
+* Resultado de la evaluación:<br>
+100.0% (74.85% / 0.00% / 74.85%)<br>
+Accuracy: 74.85% / 0.00% / 74.85%
+
+**Memm, mnb, n=2**:
+* Tiempo de entrenamiento: 57 segundos<br>
+* Tiempo de evaluación:  
+* Resultado de la evaluación:<br>
+
+
+**Memm, mnb, n=3**:
+* Tiempo de entrenamiento: 58 segundos<br>
+* Tiempo de evaluación: 
+* Resultado de la evaluación:<br>
+
+
+**Memm, mnb, n=4**:
+* Tiempo de entrenamiento: 1:06 minutos<br>
+* Tiempo de evaluación: 
+* Resultado de la evaluación:<br>
