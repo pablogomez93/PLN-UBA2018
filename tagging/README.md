@@ -114,17 +114,21 @@ Accuracy: 74.85% / 0.00% / 74.85%
 
 **Memm, mnb, n=2**:
 * Tiempo de entrenamiento: 57 segundos<br>
-* Tiempo de evaluación:  
+* Tiempo de evaluación: 1:07 horas 
 * Resultado de la evaluación:<br>
-
+100.0% (76.73% / 0.00% / 76.73%)<br>
+Accuracy: 76.73% / 0.00% / 76.73%
 
 **Memm, mnb, n=3**:
 * Tiempo de entrenamiento: 58 segundos<br>
-* Tiempo de evaluación: 
+* Tiempo de evaluación: 1:05 horas
 * Resultado de la evaluación:<br>
-
+100.0% (78.79% / 0.00% / 78.79%)<br>
+Accuracy: 78.79% / 0.00% / 78.79%
 
 **Memm, mnb, n=4**:
 * Tiempo de entrenamiento: 1:06 minutos<br>
-* Tiempo de evaluación: 
+* Tiempo de evaluación: 1:06 horas
 * Resultado de la evaluación:<br>
+100.0% (80.50% / 0.00% / 80.50%)<br>
+Accuracy: 80.50% / 0.00% / 80.50%
