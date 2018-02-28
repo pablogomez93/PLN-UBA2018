@@ -12,18 +12,18 @@ tags: 85<br>
 
 **POS Tags más frecuentes:**
 
-|tag	 |freq	|%     |top|
-|---|---|---|---|
-|sp000	 |79884	|15.45 |(de, en, a, del, con)|
-|nc0s000 |63452	|12.27 |(presidente, equipo, partido, país, año)|
-|da0000	 |54549	|10.55 |(la, el, los, las, El)|
-|aq0000	 |33906	|6.56  |(pasado, gran, mayor, nuevo, próximo)|
-|fc	 |30147	|5.83  |(,)|
-|np00000 |29111	|5.63  |(Gobierno, España, PP, Barcelona, Madrid)||
-|nc0p000 |27736	|5.36  |(años, millones, personas, países, días)
-|fp	 |17512	|3.39  |(.)|
-|rg	 |15336	|2.97  |(más, hoy, también, ayer, ya)|
-|cc	 |15023	|2.90  |(y, pero, o, Pero, e)|
+|tag	 |significado de la etiqueta|freq	|%     |top|
+|---|---|---|---|---|
+|sp000	 |Preposition|79884	|15.45 |(de, en, a, del, con)|
+|nc0s000 |Common noun (singular)|63452	|12.27 |(presidente, equipo, partido, país, año)|
+|da0000	 |Article (definite)|54549	|10.55 |(la, el, los, las, El)|
+|aq0000	 |Adjective (descriptive)|33906	|6.56  |(pasado, gran, mayor, nuevo, próximo)|
+|fc	 |Comma|30147	|5.83  |(,)|
+|np00000 |Proper noun|29111	|5.63  |(Gobierno, España, PP, Barcelona, Madrid)||
+|nc0p000 |Common noun (plural)|27736	|5.36  |(años, millones, personas, países, días)
+|fp	 |Period / full-stop|17512	|3.39  |(.)|
+|rg	 |Adverb (general)|15336	|2.97  |(más, hoy, también, ayer, ya)|
+|cc	 |Conjunction (coordinating)|15023	|2.90  |(y, pero, o, Pero, e)|
 
 **Niveles de ambigüedad de las palabras:**
 
