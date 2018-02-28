@@ -52,8 +52,30 @@ __Ejercicio 3__
 __Ejercicio 4__
 ========
 
-__Ejercicio 5__
-========
+**Memm, maxent (Logistic Regression), n=1**:
+* Tiempo de entrenamiento: 10:51 minutos<br>
+* Tiempo de evaluación: 26 segundos
+* Resultado de la evaluación:<br>
+100.0% (91.69% / 0.00% / 91.69%)<br>
+Accuracy: 91.69% / 0.00% / 91.69%
 
-__Ejercicio 6__
-========
+**Memm, maxent (Logistic Regression), n=2**:
+* Tiempo de entrenamiento: 12:30 minutos<br>
+* Tiempo de evaluación: 28 segundos
+* Resultado de la evaluación:<br>
+100.0% (90.20% / 0.00% / 90.20%)<br>
+Accuracy: 90.20% / 0.00% / 90.20%
+
+**Memm, maxent (Logistic Regression), n=3**:
+* Tiempo de entrenamiento: 15:57 minutos<br>
+* Tiempo de evaluación: 28 segundos
+* Resultado de la evaluación:<br>
+100.0% (89.58% / 0.00% / 89.58%)<br>
+Accuracy: 89.58% / 0.00% / 89.58%
+
+**Memm, maxent (Logistic Regression), n=4**:
+* Tiempo de entrenamiento: 20:03 minutos<br>
+* Tiempo de evaluación: 28 segundos
+* Resultado de la evaluación:<br>
+100.0% (89.48% / 0.00% / 89.48%)<br>
+Accuracy: 89.48% / 0.00% / 89.48%
