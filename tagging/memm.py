@@ -45,12 +45,7 @@ class MEMM:
 
         # 3. build known words set
         # WORK HERE!!
-        voc = set()
-        for sent in tagged_sents:
-            for word, tag in sent:
-                voc.add(word)
-
-        self.vocabulary = voc
+        self.vocabulary = set([word for sent in tagged_sents for word, tag in sent])
 
     def sents_histories(self, tagged_sents):
         """
