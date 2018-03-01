@@ -1,6 +1,3 @@
-from math import log2
-from numpy import exp2
-
 from featureforge.vectorizer import Vectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.naive_bayes import MultinomialNB
@@ -27,18 +24,16 @@ class MEMM:
         clf -- classifying model, one of 'svm', 'maxent', 'mnb' (default: 'svm').
         """
         # 1. build the pipeline
-        # WORK HERE!! 
+        # WORK HERE!!
         self.n = n
         basic_features = [word_lower, word_istitle, word_isupper, word_isdigit]
         features = basic_features + [cf(f) for f in basic_features for cf in [PrevWord, NextWord]] + [NPrevTags(i) for i in range(1, self.n+1)]
         vect = Vectorizer(features)
-        
+
         self._pipeline = pipeline = Pipeline([
             ('vect', vect),
             ('clf', classifiers[clf]())
         ])
-
-        histories = self.sents_histories(tagged_sents)
 
         # 2. train it
         print('Training classifier...')
@@ -56,7 +51,6 @@ class MEMM:
                 voc.add(word)
 
         self.vocabulary = voc
-
 
     def sents_histories(self, tagged_sents):
         """
