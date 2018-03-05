@@ -3,6 +3,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegression
+from nltk.corpus import stopwords
 
 
 classifiers = {
@@ -20,7 +21,7 @@ class SentimentClassifier(object):
         """
         self._clf = clf
         self._pipeline = pipeline = Pipeline([
-            ('vect', CountVectorizer()),
+            ('vect', CountVectorizer(stop_words=set(stopwords.words('spanish')))),
             ('clf', classifiers[clf]()),
         ])
 
