@@ -5,6 +5,7 @@ from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegression
 from nltk import word_tokenize
 from nltk.corpus import stopwords
+from nltk.stem import SnowballStemmer
 
 
 classifiers = {
@@ -12,6 +13,17 @@ classifiers = {
     'mnb': MultinomialNB,
     'svm': LinearSVC,
 }
+
+
+class CustomVectorizer_Stemmizer(CountVectorizer):
+    def build_analizer(self):
+        # Code extracted from: http://scikit-learn.org/stable/modules/feature_extraction.html#customizing-the-vectorizer-classes
+        # Overriding the analyzer, we have replaced "preprocessor" and "tokenizer".
+        nltkSpanishStemmer = SnowballStemmer('spanish')
+        analizer = super(CustomVectorizer_Stemmizer, self).build_analizer()
+
+        # Stemmize each one.
+        return lambda doc: ([nltkSpanishStemmer.stem(d) for d in analyzer(doc)])
 
 
 class SentimentClassifier(object):
@@ -22,7 +34,8 @@ class SentimentClassifier(object):
         """
         self._clf = clf
         self._pipeline = pipeline = Pipeline([
-            ('vect', CountVectorizer(stop_words=set(stopwords.words('spanish')), binary=True, tokenizer=word_tokenize)),
+            #('vect', CountVectorizer(stop_words=set(stopwords.words('spanish')), binary=True, tokenizer=word_tokenize)),
+            ('vect', CustomVectorizer_Stemmizer()),
             ('clf', classifiers[clf]()),
         ])
 
