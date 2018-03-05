@@ -1,18 +1,24 @@
 """Draw a learning curve for a Sentiment Analysis model.
 
 Usage:
-  curve.py [-m <model>] [-c <clf>]
+  curve.py [-m <model>] [-c <clf>] [-v <vectorizer>]
   curve.py -h | --help
 
 Options:
-  -m <model>    Model to use [default: basemf]:
-                  basemf: Most frequent sentiment
-                  clf: Machine Learning Classifier
-  -c <clf>      Classifier to use if the model is a MEMM [default: svm]:
-                  maxent: Maximum Entropy (i.e. Logistic Regression)
-                  svm: Support Vector Machine
-                  mnb: Multinomial Bayes
-  -h --help     Show this screen.
+  -m <model>      Model to use [default: basemf]:
+                    basemf: Most frequent sentiment
+                    clf: Machine Learning Classifier
+  -c <clf>        Classifier to use if the model is a MEMM [default: svm]:
+                    maxent: Maximum Entropy (i.e. Logistic Regression)
+                    svm: Support Vector Machine
+                    mnb: Multinomial Bayes
+  -v <vectorizer>        Vectorizer to use if the model is clf [default: countVectorizer]:
+                    stop_words: CountVectorizer with the stop_words parameter using the nltk stopwords for spanish
+                    binary: CountVectorizer with the binary parameter setted
+                    better_tokenizer: CountVectorizer using the nltk tokenizer
+                    stemmizer:  CountVectorizer with stemmizing, using the nltk SnowballStemmer for spanish
+                    countVectorizer: Standard CountVectorizer
+  -h --help       Show this screen.
 """
 from docopt import docopt
 
@@ -46,7 +52,7 @@ if __name__ == '__main__':
     # train model
     model_type = opts['-m']
     if model_type == 'clf':
-        model = models[model_type](clf=opts['-c'])
+        model = models[model_type](clf=opts['-c'], vectorizer=opts['-v'])
     else:
         model = models[model_type]()  # baseline
     evaluator = Evaluator()
