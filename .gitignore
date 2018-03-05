@@ -1,0 +1,9 @@
+# Non extension files (this must be at the beginning of the gitignore file
+*
+!/**/
+!*.*
+
+._*
+__pycache__
+pln_uba2018.egg-info
+
