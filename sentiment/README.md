@@ -7,7 +7,11 @@ __Ejercicio 2__
 ========
 Para este ejercicio se decidieron implementar las 4 mejoras correspondientes a *Filtrado de stopwords*, *Binarización de Conteos*, un *Mejor Tokenizer* y el *Stemming*.
 
-Luego de implementarlos, se obtuvieron (con el script *curve.py*) los siguientes datos:
+Luego de implementarlos, se obtuvieron (con el script *curve.py*) los siguientes datos. Dicho script se utilizó de la siguiente manera:<br>
+```bash
+python scripts/curve.py -m clf -c {{classifier}} -v {{vectorizer}}
+```
+donde vectorizer ∈ {stop_words, binary, better_tokenizer, stemmizer} y classifier ∈ {maxent, mnb, svm}
 
 ![](images/stopwords_curve.png)
 ![](images/binary_curve.png)
