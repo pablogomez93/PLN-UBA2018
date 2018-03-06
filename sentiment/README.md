@@ -187,3 +187,42 @@ ya [ 0.19726126 -0.07592205 -0.03605193 -0.05668675]
 
 __Ejercicio 3__
 ========
+La combinación que mejor accuracy presentó fue la mejora del tokenizer de nltk, con el clasificador mnb.
+
+Entrenamos un modelo con esa combinación:
+```bash
+python scripts/train.py -m clf -c mnb -v better_tokenizer -o main
+```
+y luego lo evaluamos con el corpus de test final de InterTASS:
+```bash
+python scripts/eval.py -i main -f
+```
+dando los siguientes resultados:
+
+<pre>
+Sentiment P:
+  Precision: 51.30% (533/1039)
+  Recall: 83.02% (533/642)
+  F1: 63.41%
+Sentiment N:
+  Precision: 62.12% (528/850)
+  Recall: 68.84% (528/767)
+  F1: 65.31%
+Sentiment NEU:
+  Precision: 0.00% (0/1)
+  Recall: 0.00% (0/216)
+  F1: 0.00%
+Sentiment NONE:
+  Precision: 33.33% (3/9)
+  Recall: 1.09% (3/274)
+  F1: 2.12%
+Accuracy: 56.03% (1064/1899)
+Macro-Precision: 36.69%
+Macro-Recall: 38.24%
+Macro-F1: 37.45%
+	P	N	NEU	NONE
+P	533	105	1	3	
+N	238	528	0	1	
+NEU	112	102	0	2	
+NONE	156	115	0	3
+</pre>
