@@ -1,7 +1,7 @@
 """Train a Sentiment Analysis model.
 
 Usage:
-  train.py [-m <model>] [-c <clf>] -o <file>
+  train.py [-m <model>] [-c <clf>] [-v <vectorizer>] -o <file>
   train.py -h | --help
 
 Options:
@@ -12,6 +12,12 @@ Options:
                   maxent: Maximum Entropy (i.e. Logistic Regression)
                   svm: Support Vector Machine
                   mnb: Multinomial Bayes
+  -v <vectorizer>        Vectorizer to use if the model is clf [default: countVectorizer]:
+                    stop_words: CountVectorizer with the stop_words parameter using the nltk stopwords for spanish
+                    binary: CountVectorizer with the binary parameter setted
+                    better_tokenizer: CountVectorizer using the nltk tokenizer
+                    stemmizer:  CountVectorizer with stemmizing, using the nltk SnowballStemmer for spanish
+                    countVectorizer: Standard CountVectorizer
   -o <file>    Output model file.
   -h --help     Show this screen.
 """
@@ -42,7 +48,7 @@ if __name__ == '__main__':
     # train model
     model_type = opts['-m']
     if model_type == 'clf':
-        model = models[model_type](clf=opts['-c'])
+        model = models[model_type](clf=opts['-c'], vectorizer=opts['-v'])
     else:
         model = models[model_type]()  # baseline
 
