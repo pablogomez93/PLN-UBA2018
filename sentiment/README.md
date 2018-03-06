@@ -19,6 +19,21 @@ donde vectorizer ∈ {stop_words, binary, better_tokenizer, stemmizer} y classif
 ![](images/stemmizer_curve.png)
 
 También, se entrenaron modelos con estas 4 mejoras (con el script *train.py*) y luego se evaluaron (con el script *eval.py*).<br> 
+El entrenamiento se corrió de esta forma:
+```bash
+python scripts/train.py -m clf -v stop_words -o clf_stop_words
+python scripts/train.py -m clf -v binary -o clf_binary
+python scripts/train.py -m clf -v better_tokenizer -o clf_better_tokenizer
+python scripts/train.py -m clf -v stemmizer -o clf_stemmizer
+```
+Mientras que la evaluación fue de esta forma:
+```bash
+python scripts/eval.py -i clf_stop_words
+python scripts/eval.py -i clf_binary
+python scripts/eval.py -i clf_better_tokenizer
+python scripts/eval.py -i clf_stemmizer
+```
+
 Los resultados fueron los siguientes:
 
 __Filtrado de stopwords:__<br>
