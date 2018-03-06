@@ -133,5 +133,38 @@ NEU	26	26	5	12
 NONE	12	25	5	20
 </pre>
 
+Finalmente, para la mejora de *Stemming*, se utilizó la funcion *print_maxent_features* del módulo *sentiment.analysis* para imprimir las features más relevantes para cada sentimiento, el resultado fue el siguiente:
+<pre>
+N:
+	portada buena enhorabuena gracias besos ([-1.57715354 -1.43077936 -1.42759822 -1.41947779 -1.36450292])
+	odio déficit recortes muertos triste ([1.6724519  1.68052657 1.78226641 2.04207167 2.42096484])
+NEU:
+	parados cree enhorabuena cuenta puedes ([-1.11954982 -0.99833537 -0.93920145 -0.90387799 -0.8670128 ])
+	decidirán broma palomacervilla expectación huelga ([1.26041253 1.26806314 1.30022578 1.32740269 1.34231887])
+NONE:
+	feliz gracias interesante gran enhorabuena ([-1.95280773 -1.93897273 -1.84154676 -1.79116806 -1.70262616])
+	periódico sesión jugar reunión portada ([1.21813152 1.30945322 1.38032478 1.45742904 2.20772094])
+P:
+	portada triste culpa urdangarin griñan ([-1.66217174 -1.54530836 -1.42478139 -1.31705283 -1.27911123])
+	genial homenaje gracias felicidades enhorabuena ([1.85082741 2.00512272 2.14249476 2.27528371 2.44819998])
+</pre>
+
+Un tweet de ejemplo (index: 50) con todos los features que intervienen y sus respectivos pesos para cada clase:
+
+__El tweet:__ *Ya no tengo capítulos de Juego de Tronos para ver. Me siento vacía.*<br>
+__Features que intervienen y sus respectivos pesos para cada clase__:
+<pre>de [ 0.14313646 -0.05570942 -0.17630761 -0.05663444]
+juego [ 0.78469745 -0.11538696 -0.3204529  -0.22990503]
+me [ 0.23602964  0.19227238 -0.52411408 -0.04308249]
+no [ 0.78461065  0.1258132  -0.48234933 -0.71972274]
+para [-0.12413375  0.00843401 -0.23649203  0.2347741 ]
+siento [ 0.70986843 -0.64370655 -0.7840991   0.19530338]
+tengo [ 0.22874328  0.0318604  -0.12276005 -0.00292717]
+tronos [ 0.49465409 -0.11848242 -0.03758381 -0.51026516]
+vacía [-0.16339076  0.56457179 -0.04671527 -0.25213988]
+ver [-0.2964723   0.09973627 -0.13064798  0.23462496]
+ya [ 0.19726126 -0.07592205 -0.03605193 -0.05668675]
+</pre>
+
 __Ejercicio 3__
 ========
