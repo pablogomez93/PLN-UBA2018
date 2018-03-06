@@ -25,6 +25,21 @@ __Ejercicio 2__
 ========
 Para este ejercicio se decidieron implementar las 4 mejoras correspondientes a *Filtrado de stopwords*, *Binarización de Conteos*, un *Mejor Tokenizer* y el *Stemming*.
 
+Dicha implementación consistió en declarar un diccionario *vectorizers*, donde cada value de cada key es un *callable*.
+```python
+vectorizers = {
+    'stop_words': stop_word_vectorizer,
+    'binary': binary_vectorizer,
+    'better_tokenizer': better_tokenizer_vectorizer,
+    'stemmizer': stemmizer_vectorizer,
+    'countVectorizer': CountVectorizer,
+}
+```
+De esta forma podemos acceder al diccionario con el parámetro recibido por parámetro y ejecutar el *callable* para que nos devuelva el Vectorizer elegido. Por ejemplo, si recibimos el parámetro "binary", ejecutar vectorizers["binary"] nos devolverá un *CountVectorizer(binary=True)*.
+
+Los 3 primeros *callables* (stop_word_vectorizer, binary_vectorizer y better_tokenizer_vectorizer) son en particular funciones que instancian y retornan vectorizers. Por otro lado *CountVectorizer* es el *CountVectorizer* estándar y *stemmizer_vectorizer* es una clase que extiende a *CountVectorizer* para overridear el método *build_analizer* y poder aplicar el *Stemming* del español. Esta último desición de diseño fue tomada de http://scikit-learn.org/stable/modules/feature_extraction.html#customizing-the-vectorizer-classes.<br>
+El valor del parámetro vectorizer por default es "countVectorizer". 
+
 Luego de implementarlos, se obtuvieron (con el script *curve.py*) los siguientes datos. Dicho script se utilizó de la siguiente manera:<br>
 ```bash
 python scripts/curve.py -m clf -c {{classifier}} -v {{vectorizer}}
