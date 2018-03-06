@@ -2,6 +2,24 @@ Solución de los ejercicios y datos obtenidos de los mismos
 =============
 __Ejercicio 1__
 ========
+Se creó un script *stats.py* encargado de imprimir las estadísticas básicas solicitadas.<br>
+El mismo contiene una función *printStatistics(reader, corpusName)* que recibe un reader (por ejemplo el InterTASSReader o el GeneralTASSReader) y un nombre de corpus. Este imprime el *corpusName* seguido de la cantidad total de tweets y la cantidad de tweets de cada polaridad (P, N, NEU, NONE).
+
+<pre>
+InterTASS
+Tweets totales: 1008
+Tweets P: 318
+Tweets N: 418
+Tweets NEU: 133
+Tweets NONE: 139
+
+GeneralTASS
+Tweets totales: 7219
+Tweets P: 1232
+Tweets N: 1335
+Tweets NEU: 670
+Tweets NONE: 1483
+</pre>
 
 __Ejercicio 2__
 ========
